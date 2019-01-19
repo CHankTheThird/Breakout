@@ -22,16 +22,21 @@ namespace Breakout
 
 		private void OnCollisionEnter2D(Collision2D collision)
 		{
-			Vector2 relativeImpactPoint = collision.GetContact(0).point - new Vector2(transform.position.x, transform.position.y);
+			Vector2 reflectedVelocity = Vector2.zero;
 
-			if (Mathf.Abs(relativeImpactPoint.x) > Mathf.Abs(relativeImpactPoint.y))
+			PaddleMovement paddle = collision.collider.GetComponent<PaddleMovement>();
+			if (paddle != null)
 			{
-				ballBody.velocity = new Vector2(-ballBody.velocity.x, ballBody.velocity.y);
+				// if we hit the paddle then we need to reflect our velocity at an angle relative to the center of the paddle
+				reflectedVelocity = paddle.Reflect(ballBody.velocity, collision);
 			}
 			else
 			{
-				ballBody.velocity = new Vector2(ballBody.velocity.x, -ballBody.velocity.y);
+				// otherwise we can just reflect the velocity at the normal of the contact point
+				reflectedVelocity = Vector2.Reflect(ballBody.velocity, collision.GetContact(0).normal);
 			}
+
+			ballBody.velocity = reflectedVelocity;
 		}
 	}
 }
