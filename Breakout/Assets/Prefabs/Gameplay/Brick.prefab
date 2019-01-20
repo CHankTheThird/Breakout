@@ -123,3 +123,4 @@ MonoBehaviour:
   m_pointValue: 1
   m_brickColor: {r: 0, g: 0.6784314, b: 0, a: 1}
   m_damagedSprite: {fileID: 21300000, guid: 9ee9fd5fda14bb048956de4fd6584966, type: 3}
+  player: {fileID: 11400000, guid: a17edbc34e3c21c4d8ab8b2e593af480, type: 2}

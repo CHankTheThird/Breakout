@@ -6,8 +6,14 @@ namespace Breakout
 	{
 		[Header("References")]
 		[SerializeField] private PaddleMovement m_paddleMovement;
+		[SerializeField] private PlayerInfo m_playerInfo;
 
 		private float m_horizontalInput;
+
+		private void Awake()
+		{
+			m_playerInfo.InitializePlayerInfo();
+		}
 
 		private void Update()
 		{

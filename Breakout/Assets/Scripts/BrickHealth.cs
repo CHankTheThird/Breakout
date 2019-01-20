@@ -13,6 +13,10 @@ namespace Breakout
 		[SerializeField] private Color m_brickColor;
 		[SerializeField] private Sprite m_damagedSprite;
 
+		// temporary reference to player to test ui; need to implement cleaner solution for updating score
+		[Header("Player Reference TEMP")]
+		public PlayerInfo player;
+
 		private float m_currentHealth;
 
 		private SpriteRenderer spriteRenderer { get; set; }
@@ -46,7 +50,8 @@ namespace Breakout
 			if (m_currentHealth <= 0)
 			{
 				// Give points
-				Debug.Log("Brick destroyed, " + m_pointValue + " given");
+				// TEMP
+				player?.IncreaseScore(m_pointValue);
 
 				Destroy(gameObject);
 			}
