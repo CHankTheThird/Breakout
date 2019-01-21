@@ -21,8 +21,6 @@ namespace Breakout
 		private void Start()
 		{
 			m_startPosition = transform.position;
-
-			SetInitialVelocity();
 		}
 
 		private void OnCollisionEnter2D(Collision2D collision)
@@ -44,10 +42,20 @@ namespace Breakout
 			ballBody.velocity = reflectedVelocity;
 		}
 		
-		public void Respawn()
+		public void LaunchBall()
+		{
+			SetInitialVelocity();
+		}
+
+		public void ResetBall()
 		{
 			ballBody.velocity = Vector2.zero;
 			transform.position = m_startPosition;
+		}
+
+		public void Respawn()
+		{
+			ResetBall();
 
 			Invoke("SetInitialVelocity", 2f);
 		}
