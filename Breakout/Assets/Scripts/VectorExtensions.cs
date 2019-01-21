@@ -4,6 +4,9 @@ namespace Breakout
 {
 	public static class VectorExtensions
 	{
+		/// <summary>
+		/// Returns the vector rotated by the angle given (in radians)
+		/// </summary>
 		public static Vector2 RotateVector2(this Vector2 vectorToRotate, float angleToRotate)
 		{
 			float x = vectorToRotate.x;

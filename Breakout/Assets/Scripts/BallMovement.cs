@@ -7,6 +7,9 @@ namespace Breakout
 	{
 		[Header("Movement Settings")]
 		[SerializeField] private float m_baseSpeed = 3f;
+		[SerializeField] private float m_initialLaunchAngle = 35f;
+
+		private Vector2 m_startPosition;
 
 		private Rigidbody2D ballBody { get; set; }
 
@@ -17,7 +20,9 @@ namespace Breakout
 
 		private void Start()
 		{
-			ballBody.velocity = Random.insideUnitCircle.normalized * m_baseSpeed;
+			m_startPosition = transform.position;
+
+			SetInitialVelocity();
 		}
 
 		private void OnCollisionEnter2D(Collision2D collision)
@@ -37,6 +42,19 @@ namespace Breakout
 			}
 
 			ballBody.velocity = reflectedVelocity;
+		}
+		
+		public void Respawn()
+		{
+			ballBody.velocity = Vector2.zero;
+			transform.position = m_startPosition;
+
+			Invoke("SetInitialVelocity", 2f);
+		}
+
+		private void SetInitialVelocity()
+		{
+			ballBody.velocity = Vector2.up.RotateVector2(Random.Range(-m_initialLaunchAngle, m_initialLaunchAngle) * Mathf.Deg2Rad) * m_baseSpeed;
 		}
 	}
 }
