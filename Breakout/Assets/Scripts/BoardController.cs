@@ -16,9 +16,13 @@ namespace Breakout
 
 		private int numBricksRemaining { get; set; }
 
+		private AudioSource audioSource { get; set; }
+
 		private void Awake()
 		{
 			m_bricks = new List<BrickHealth>();
+
+			audioSource = GetComponent<AudioSource>();
 		}
 
 		public void PopulateBoard()
@@ -38,6 +42,7 @@ namespace Breakout
 							// Can tie in to events on a brick level here when we create them
 							BrickHealth newBrick = Instantiate(brickType, currentBrickPlacePosition, Quaternion.identity, transform);
 							newBrick.onDestroyedEvent.AddListener(BrickDestroyed);
+							newBrick.onDamagedEvent.AddListener(BrickDamaged);
 							m_bricks.Add(newBrick);
 
 							numBricksRemaining++;
@@ -56,15 +61,29 @@ namespace Breakout
 			foreach (BrickHealth brick in m_bricks)
 			{
 				brick.onDestroyedEvent.RemoveListener(BrickDestroyed);
+				brick.onDamagedEvent.RemoveListener(BrickDamaged);
 				Destroy(brick.gameObject);
 			}
 
 			m_bricks.Clear();
 		}
 
+		private void BrickDamaged(BrickHealth brickDamaged)
+		{
+			if (audioSource != null && brickDamaged.damagedSound != null)
+			{
+				audioSource.PlayOneShot(brickDamaged.damagedSound);
+			}
+		}
+
 		private void BrickDestroyed(BrickHealth brickDestroyed)
 		{
 			numBricksRemaining--;
+
+			if (audioSource != null && brickDestroyed.destroyedSound != null)
+			{
+				audioSource.PlayOneShot(brickDestroyed.destroyedSound);
+			}
 
 			if (m_gameInfo != null)
 			{
@@ -79,6 +98,7 @@ namespace Breakout
 			m_bricks.Remove(brickDestroyed);
 
 			brickDestroyed.onDestroyedEvent.RemoveListener(BrickDestroyed);
+			brickDestroyed.onDamagedEvent.RemoveListener(BrickDamaged);
 		}
 	}
 }

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 
 namespace Breakout
 {
@@ -8,6 +9,9 @@ namespace Breakout
 		[Header("Movement Settings")]
 		[SerializeField] private float m_baseSpeed = 3f;
 		[SerializeField] private float m_initialLaunchAngle = 35f;
+
+		[Header("Events")]
+		[SerializeField] private UnityEvent m_onBallCollision;
 
 		private Vector2 m_startPosition;
 
@@ -37,6 +41,11 @@ namespace Breakout
 			{
 				// otherwise we can just reflect the velocity at the normal of the contact point
 				reflectedVelocity = Vector2.Reflect(ballBody.velocity, collision.GetContact(0).normal);
+			}
+
+			if (m_onBallCollision != null)
+			{
+				m_onBallCollision.Invoke();
 			}
 
 			ballBody.velocity = reflectedVelocity;

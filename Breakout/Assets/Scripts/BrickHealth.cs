@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.Events;
 
 namespace Breakout
 {
@@ -14,13 +13,20 @@ namespace Breakout
 		[SerializeField] private Color m_brickColor;
 		[SerializeField] private Sprite m_damagedSprite;
 
+		[Header("Sound Settings")]
+		[SerializeField] private AudioClip m_damagedSound;
+		[SerializeField] private AudioClip m_destroyedSound;
+
 		[Header("Events")]
-		public UnityEvent onDamagedEvent;
+		public UnityEvents.UnityEventBrickHealth onDamagedEvent;
 		public UnityEvents.UnityEventBrickHealth onDestroyedEvent;
 
 		private float m_currentHealth;
 
 		public int pointValue { get { return m_pointValue; } }
+
+		public AudioClip damagedSound { get { return m_damagedSound; } }
+		public AudioClip destroyedSound { get { return m_destroyedSound; } }
 
 		private SpriteRenderer spriteRenderer { get; set; }
 
@@ -45,16 +51,6 @@ namespace Breakout
 		{
 			m_currentHealth--;
 
-			if (onDamagedEvent != null)
-			{
-				onDamagedEvent.Invoke();
-			}
-
-			if (m_damagedSprite != null)
-			{
-				spriteRenderer.sprite = m_damagedSprite;
-			}
-
 			if (m_currentHealth <= 0)
 			{
 				// Give points
@@ -64,6 +60,18 @@ namespace Breakout
 				}
 
 				Destroy(gameObject);
+			}
+			else
+			{
+				if (onDamagedEvent != null)
+				{
+					onDamagedEvent.Invoke(this);
+				}
+
+				if (m_damagedSprite != null)
+				{
+					spriteRenderer.sprite = m_damagedSprite;
+				}
 			}
 		}
 	}

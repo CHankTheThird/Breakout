@@ -123,4 +123,15 @@ MonoBehaviour:
   m_pointValue: 1
   m_brickColor: {r: 0, g: 0.6784314, b: 0, a: 1}
   m_damagedSprite: {fileID: 21300000, guid: 9ee9fd5fda14bb048956de4fd6584966, type: 3}
-  player: {fileID: 11400000, guid: a17edbc34e3c21c4d8ab8b2e593af480, type: 2}
+  m_damagedSound: {fileID: 8300000, guid: a72387b91d425b947b6e7692bdea1b37, type: 3}
+  m_destroyedSound: {fileID: 8300000, guid: aaee5831c146e4444a0a2ffeed602e3b, type: 3}
+  onDamagedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: Breakout.UnityEvents+UnityEventBrickHealth, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  onDestroyedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: Breakout.UnityEvents+UnityEventBrickHealth, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
