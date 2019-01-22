@@ -13,9 +13,16 @@ namespace Breakout
 
 		private Rigidbody2D paddleBody { get; set; }
 
+		private Vector2 initialPosition { get; set; }
+
 		private void Awake()
 		{
 			paddleBody = GetComponent<Rigidbody2D>();
+		}
+
+		private void Start()
+		{
+			initialPosition = transform.position;
 		}
 
 		public void UpdateMovement(float deltaTime, float horizontalInput)
@@ -38,6 +45,12 @@ namespace Breakout
 			Vector2 adjustedNormal = collision.GetContact(0).normal.RotateVector2(m_reflectionAngleCurve.Evaluate(distanceFromCenter) * Mathf.Deg2Rad);
 
 			return Vector2.Reflect(incomingVelocity, adjustedNormal);
+		}
+
+		public void ResetPaddle()
+		{
+			paddleBody.velocity = Vector2.zero;
+			transform.position = initialPosition;
 		}
 	}
 }

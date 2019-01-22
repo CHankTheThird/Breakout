@@ -7,6 +7,7 @@ namespace Breakout
 		[SerializeField] private PlayerController m_player;
 		[SerializeField] private BallMovement m_ball;
 		[SerializeField] private BoardController m_board;
+		[SerializeField] private RectTransform m_gameOverPanel;
 		[SerializeField] private GameInfo m_gameInfo;
 		
 		private void Start()
@@ -18,7 +19,11 @@ namespace Breakout
 				m_gameInfo.ResetGameInfo();
 			}
 
-			BeginPlay();
+			// Populate board through BoardController
+			if (m_board != null)
+			{
+				m_board.PopulateBoard();
+			}
 		}
 
 		public void BeginPlay()
@@ -36,14 +41,6 @@ namespace Breakout
 				m_gameInfo.gameLivesChanged.AddListener(CheckLivesTotal);
 
 				m_gameInfo.gameLevelChanged.AddListener(CheckNewLevelStatus);
-			}
-
-			// Hide Start Screen
-
-			// Populate board through BoardController
-			if (m_board != null)
-			{
-				m_board.PopulateBoard();
 			}
 
 			// Launch ball
@@ -100,11 +97,26 @@ namespace Breakout
 			if (m_gameInfo != null)
 			{
 				m_gameInfo.gameLivesChanged.RemoveListener(CheckLivesTotal);
+
+				m_gameInfo.gameLevelChanged.RemoveListener(CheckNewLevelStatus);
 			}
 
 			// Display end screen
+			if (m_gameOverPanel != null)
+			{
+				m_gameOverPanel.gameObject.SetActive(true);
+			}
 
 			// Reset ball and paddle position
+			if (m_ball != null)
+			{
+				m_ball.ResetBall();
+			}
+
+			if (m_player != null)
+			{
+				m_player.ResetPlayer();
+			}
 		}
 
 		public void ResetForNewGame()
@@ -115,6 +127,12 @@ namespace Breakout
 				m_gameInfo.ResetGameInfo();
 			}
 
+			// Reset Board
+			if (m_board != null)
+			{
+				m_board.ClearBoard();
+				m_board.PopulateBoard();
+			}
 		}
 	}
 }

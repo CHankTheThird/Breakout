@@ -35,5 +35,15 @@ namespace Breakout
 		{
 			m_horizontalInput = Input.GetAxis("Horizontal");
 		}
+
+		public void ResetPlayer()
+		{
+			isInitialized = false;
+
+			if (m_paddleMovement != null)
+			{
+				m_paddleMovement.ResetPaddle();
+			}
+		}
 	}
 }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Breakout
 {
@@ -10,9 +11,16 @@ namespace Breakout
 		[SerializeField] private GameInfo m_gameInfo;
 
 		private Vector2 currentBrickPlacePosition;
-		
+
+		private List<BrickHealth> m_bricks;
+
 		private int numBricksRemaining { get; set; }
-		
+
+		private void Awake()
+		{
+			m_bricks = new List<BrickHealth>();
+		}
+
 		public void PopulateBoard()
 		{
 			numBricksRemaining = 0;
@@ -30,7 +38,8 @@ namespace Breakout
 							// Can tie in to events on a brick level here when we create them
 							BrickHealth newBrick = Instantiate(brickType, currentBrickPlacePosition, Quaternion.identity, transform);
 							newBrick.onDestroyedEvent.AddListener(BrickDestroyed);
-							
+							m_bricks.Add(newBrick);
+
 							numBricksRemaining++;
 
 							currentBrickPlacePosition.x += 1f;
@@ -40,6 +49,17 @@ namespace Breakout
 					currentBrickPlacePosition.y -= 0.5f;
 				}
 			}
+		}
+
+		public void ClearBoard()
+		{
+			foreach (BrickHealth brick in m_bricks)
+			{
+				brick.onDestroyedEvent.RemoveListener(BrickDestroyed);
+				Destroy(brick.gameObject);
+			}
+
+			m_bricks.Clear();
 		}
 
 		private void BrickDestroyed(BrickHealth brickDestroyed)
@@ -55,6 +75,8 @@ namespace Breakout
 					m_gameInfo.NextLevel();
 				}
 			}
+
+			m_bricks.Remove(brickDestroyed);
 
 			brickDestroyed.onDestroyedEvent.RemoveListener(BrickDestroyed);
 		}
