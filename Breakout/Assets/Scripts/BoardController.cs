@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Breakout
 {
@@ -8,19 +7,16 @@ namespace Breakout
 		[SerializeField] private BoardInfo m_boardInfo;
 		[SerializeField] private Vector2 m_initialBrickPosition;
 
+		[SerializeField] private GameInfo m_gameInfo;
+
 		private Vector2 currentBrickPlacePosition;
-
-		private List<BrickHealth> m_bricks;
-
-		public int numBricksRemaining { get { return m_bricks != null ? m_bricks.Count : 0; } }
-
-		private void Awake()
-		{
-			m_bricks = new List<BrickHealth>();
-		}
+		
+		private int numBricksRemaining { get; set; }
 		
 		public void PopulateBoard()
 		{
+			numBricksRemaining = 0;
+
 			if (m_boardInfo != null)
 			{
 				currentBrickPlacePosition = m_initialBrickPosition;
@@ -32,8 +28,11 @@ namespace Breakout
 						for (int i = 0; i < m_boardInfo.GetNumBrickColumns(); i++)
 						{
 							// Can tie in to events on a brick level here when we create them
+							BrickHealth newBrick = Instantiate(brickType, currentBrickPlacePosition, Quaternion.identity, transform);
+							newBrick.onDestroyedEvent.AddListener(BrickDestroyed);
+							
+							numBricksRemaining++;
 
-							m_bricks.Add(Instantiate(brickType, currentBrickPlacePosition, Quaternion.identity, transform));
 							currentBrickPlacePosition.x += 1f;
 						}
 						currentBrickPlacePosition.x = m_initialBrickPosition.x;
@@ -41,6 +40,23 @@ namespace Breakout
 					currentBrickPlacePosition.y -= 0.5f;
 				}
 			}
+		}
+
+		private void BrickDestroyed(BrickHealth brickDestroyed)
+		{
+			numBricksRemaining--;
+
+			if (m_gameInfo != null)
+			{
+				m_gameInfo.IncreaseScore(brickDestroyed.pointValue);
+
+				if (numBricksRemaining <= 0)
+				{
+					m_gameInfo.NextLevel();
+				}
+			}
+
+			brickDestroyed.onDestroyedEvent.RemoveListener(BrickDestroyed);
 		}
 	}
 }

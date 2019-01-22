@@ -14,8 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_brickRows:
   - {fileID: 2624340049149874028, guid: a0907cd2a8a3b714e9b33ebd926704ba, type: 3}
-  - {fileID: 2624340049149874028, guid: a0907cd2a8a3b714e9b33ebd926704ba, type: 3}
-  - {fileID: 1717749597749299608, guid: 101c67f64db35d241a54778803738993, type: 3}
-  - {fileID: 1717749597749299608, guid: 101c67f64db35d241a54778803738993, type: 3}
-  - {fileID: 94805468191700442, guid: 03bc21c3ceb64cf408fbdb0f81cd1092, type: 3}
-  - {fileID: 94805468191700442, guid: 03bc21c3ceb64cf408fbdb0f81cd1092, type: 3}
+  m_numBrickColumns: 11

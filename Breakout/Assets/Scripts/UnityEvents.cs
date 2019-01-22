@@ -16,5 +16,11 @@ namespace Breakout
 		{
 
 		}
+
+		[Serializable]
+		public class UnityEventBrickHealth : UnityEvent<BrickHealth>
+		{
+
+		}
 	}
 }

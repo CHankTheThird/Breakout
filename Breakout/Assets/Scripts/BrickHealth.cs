@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 
 namespace Breakout
 {
@@ -13,11 +14,13 @@ namespace Breakout
 		[SerializeField] private Color m_brickColor;
 		[SerializeField] private Sprite m_damagedSprite;
 
-		// temporary reference to player to test ui; need to implement cleaner solution for updating score
-		[Header("Player Reference TEMP")]
-		public PlayerInfo player;
+		[Header("Events")]
+		public UnityEvent onDamagedEvent;
+		public UnityEvents.UnityEventBrickHealth onDestroyedEvent;
 
 		private float m_currentHealth;
+
+		public int pointValue { get { return m_pointValue; } }
 
 		private SpriteRenderer spriteRenderer { get; set; }
 
@@ -42,6 +45,11 @@ namespace Breakout
 		{
 			m_currentHealth--;
 
+			if (onDamagedEvent != null)
+			{
+				onDamagedEvent.Invoke();
+			}
+
 			if (m_damagedSprite != null)
 			{
 				spriteRenderer.sprite = m_damagedSprite;
@@ -50,8 +58,10 @@ namespace Breakout
 			if (m_currentHealth <= 0)
 			{
 				// Give points
-				// TEMP
-				player?.IncreaseScore(m_pointValue);
+				if (onDestroyedEvent != null)
+				{
+					onDestroyedEvent.Invoke(this);
+				}
 
 				Destroy(gameObject);
 			}

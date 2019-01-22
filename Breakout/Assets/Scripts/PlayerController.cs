@@ -6,7 +6,6 @@ namespace Breakout
 	{
 		[Header("References")]
 		[SerializeField] private PaddleMovement m_paddleMovement;
-		[SerializeField] private PlayerInfo m_playerInfo;
 
 		private float m_horizontalInput;
 		
@@ -14,8 +13,6 @@ namespace Breakout
 
 		public void InitializePlayer()
 		{
-			m_playerInfo.InitializePlayerInfo();
-
 			isInitialized = true;
 		}
 

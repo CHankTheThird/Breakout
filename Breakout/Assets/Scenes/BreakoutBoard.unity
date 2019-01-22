@@ -310,6 +310,7 @@ MonoBehaviour:
   m_player: {fileID: 1472159619}
   m_ball: {fileID: 1354358782}
   m_board: {fileID: 1008132387}
+  m_gameInfo: {fileID: 11400000, guid: 23fd60e8aa469d54f91677c1ec0be8a8, type: 2}
 --- !u!4 &1154485611
 Transform:
   m_ObjectHideFlags: 0
@@ -514,6 +515,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2776615151623587894, guid: 1083f233dee21b540a8201f356654279,
+        type: 3}
+      propertyPath: m_gameInfo
+      value: 
+      objectReference: {fileID: 11400000, guid: 23fd60e8aa469d54f91677c1ec0be8a8,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1083f233dee21b540a8201f356654279, type: 3}
 --- !u!1001 &3998246586486198204

@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_paddleMovement: {fileID: 4887498613770194248}
-  m_playerInfo: {fileID: 11400000, guid: a17edbc34e3c21c4d8ab8b2e593af480, type: 2}
+  playerInfo: {fileID: 11400000, guid: a17edbc34e3c21c4d8ab8b2e593af480, type: 2}
 --- !u!1001 &310725929503407753
 PrefabInstance:
   m_ObjectHideFlags: 0

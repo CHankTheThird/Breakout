@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 3998246587001681438}
   - component: {fileID: 3998246587001681437}
   - component: {fileID: 3998246587001681436}
-  - component: {fileID: 4049897661679501971}
   m_Layer: 8
   m_Name: Ball
   m_TagString: Untagged
@@ -134,37 +133,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_baseSpeed: 5
   m_initialLaunchAngle: 35
---- !u!114 &4049897661679501971
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3998246587001681443}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f50f951ef1732641aed87c99c34255f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_playerInfo: {fileID: 11400000, guid: a17edbc34e3c21c4d8ab8b2e593af480, type: 2}
-  m_playerLivesChangeEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3998246587001681436}
-        m_MethodName: Respawn
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: Breakout.UnityEvents+UnityEventString, Assembly-CSharp, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  m_playerScoreChangeEvent:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: Breakout.UnityEvents+UnityEventString, Assembly-CSharp, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null

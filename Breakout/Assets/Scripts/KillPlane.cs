@@ -8,7 +8,7 @@ namespace Breakout
 	{
 		[SerializeField] private UnityEvent m_onKillEvent;
 
-		[SerializeField] private PlayerInfo m_player;
+		[SerializeField] private GameInfo m_gameInfo;
 
 		private void OnTriggerEnter2D(Collider2D collision)
 		{
@@ -17,9 +17,9 @@ namespace Breakout
 				m_onKillEvent.Invoke();
 			}
 
-			if (m_player != null)
+			if (m_gameInfo != null)
 			{
-				m_player.LoseLife();
+				m_gameInfo.LoseLife();
 			}
 		}
 	}
