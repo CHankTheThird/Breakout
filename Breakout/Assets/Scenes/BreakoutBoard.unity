@@ -871,6 +871,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameController
       objectReference: {fileID: 0}
+    - target: {fileID: 3640213185645227512, guid: 8e1978b55d9473945aa3934ee91fab01,
+        type: 3}
+      propertyPath: m_player
+      value: 
+      objectReference: {fileID: 1472159619}
+    - target: {fileID: 3640213185645227512, guid: 8e1978b55d9473945aa3934ee91fab01,
+        type: 3}
+      propertyPath: m_ball
+      value: 
+      objectReference: {fileID: 1354358782}
+    - target: {fileID: 3640213185645227512, guid: 8e1978b55d9473945aa3934ee91fab01,
+        type: 3}
+      propertyPath: m_board
+      value: 
+      objectReference: {fileID: 1008132387}
+    - target: {fileID: 3640213185645227512, guid: 8e1978b55d9473945aa3934ee91fab01,
+        type: 3}
+      propertyPath: m_gameOverPanel
+      value: 
+      objectReference: {fileID: 8516445122292468080}
     - target: {fileID: 3640213185645227513, guid: 8e1978b55d9473945aa3934ee91fab01,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -926,26 +946,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3640213185645227512, guid: 8e1978b55d9473945aa3934ee91fab01,
-        type: 3}
-      propertyPath: m_player
-      value: 
-      objectReference: {fileID: 1472159619}
-    - target: {fileID: 3640213185645227512, guid: 8e1978b55d9473945aa3934ee91fab01,
-        type: 3}
-      propertyPath: m_ball
-      value: 
-      objectReference: {fileID: 1354358782}
-    - target: {fileID: 3640213185645227512, guid: 8e1978b55d9473945aa3934ee91fab01,
-        type: 3}
-      propertyPath: m_board
-      value: 
-      objectReference: {fileID: 1008132387}
-    - target: {fileID: 3640213185645227512, guid: 8e1978b55d9473945aa3934ee91fab01,
-        type: 3}
-      propertyPath: m_gameOverPanel
-      value: 
-      objectReference: {fileID: 8516445122292468080}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e1978b55d9473945aa3934ee91fab01, type: 3}
 --- !u!1001 &3998246586486198204
@@ -1082,6 +1082,11 @@ PrefabInstance:
     - target: {fileID: 4887498614646715226, guid: 79b3452bcea5cf24fa59495334367226,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4887498613770194244, guid: 79b3452bcea5cf24fa59495334367226,
+        type: 3}
+      propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

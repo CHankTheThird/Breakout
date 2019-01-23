@@ -44,7 +44,15 @@ namespace Breakout
 			
 			Vector2 adjustedNormal = collision.GetContact(0).normal.RotateVector2(m_reflectionAngleCurve.Evaluate(distanceFromCenter) * Mathf.Deg2Rad);
 
-			return Vector2.Reflect(incomingVelocity, adjustedNormal);
+			Vector2 finalReflection = Vector2.Reflect(incomingVelocity, adjustedNormal);
+
+			// Ensure that if the ball hits the paddle it gets sent upwards
+			if (finalReflection.y < 0)
+			{
+				finalReflection = new Vector2(finalReflection.x, -finalReflection.y);
+			}
+
+			return finalReflection;
 		}
 
 		public void ResetPaddle()
