@@ -10,6 +10,9 @@ namespace Breakout
 		[SerializeField] private float m_baseSpeed = 3f;
 		[SerializeField] private float m_initialLaunchAngle = 35f;
 
+		[Header("References")]
+		[SerializeField] private GameInfo m_gameInfo;
+
 		[Header("Events")]
 		[SerializeField] private UnityEvent m_onBallCollision;
 
@@ -25,6 +28,19 @@ namespace Breakout
 		private void Start()
 		{
 			m_startPosition = transform.position;
+
+			if (m_gameInfo != null)
+			{
+				m_gameInfo.brickSpeedDeltaChanged.AddListener(AdjustBallSpeed);
+			}
+		}
+
+		private void OnDestroy()
+		{
+			if (m_gameInfo != null)
+			{
+				m_gameInfo.brickSpeedDeltaChanged.RemoveListener(AdjustBallSpeed);
+			}
 		}
 
 		private void OnCollisionEnter2D(Collision2D collision)
@@ -51,6 +67,11 @@ namespace Breakout
 			ballBody.velocity = reflectedVelocity;
 		}
 		
+		private void SetInitialVelocity()
+		{
+			ballBody.velocity = Vector2.up.RotateVector2(Random.Range(-m_initialLaunchAngle, m_initialLaunchAngle) * Mathf.Deg2Rad) * (m_baseSpeed + (m_gameInfo != null ? m_gameInfo.currentBallSpeedModifier : 1f));
+		}
+
 		public void LaunchBall()
 		{
 			SetInitialVelocity();
@@ -69,9 +90,10 @@ namespace Breakout
 			Invoke("SetInitialVelocity", 2f);
 		}
 
-		private void SetInitialVelocity()
+		private void AdjustBallSpeed(float ballSpeedModifier)
 		{
-			ballBody.velocity = Vector2.up.RotateVector2(Random.Range(-m_initialLaunchAngle, m_initialLaunchAngle) * Mathf.Deg2Rad) * m_baseSpeed;
+			Vector2 direction = ballBody.velocity.normalized;
+			ballBody.velocity = direction * (m_baseSpeed + ballSpeedModifier);
 		}
 	}
 }

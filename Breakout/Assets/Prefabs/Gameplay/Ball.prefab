@@ -134,6 +134,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_baseSpeed: 5
   m_initialLaunchAngle: 35
+  m_gameInfo: {fileID: 11400000, guid: 23fd60e8aa469d54f91677c1ec0be8a8, type: 2}
   m_onBallCollision:
     m_PersistentCalls:
       m_Calls:

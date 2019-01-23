@@ -9,10 +9,16 @@ namespace Breakout
 		[SerializeField] private Vector2 m_initialBrickPosition;
 
 		[SerializeField] private GameInfo m_gameInfo;
-
+		
 		private Vector2 currentBrickPlacePosition;
 
 		private List<BrickHealth> m_bricks;
+
+		/// <summary>
+		/// A dictionary for tracking if a type of brick has been hit yet or not
+		/// Operates on the assumption that no 2 bricks will have the same point value
+		/// </summary>
+		private Dictionary<int, bool> m_brickTypesHit;
 
 		private int numBricksRemaining { get; set; }
 
@@ -22,21 +28,35 @@ namespace Breakout
 		{
 			m_bricks = new List<BrickHealth>();
 
+			m_brickTypesHit = new Dictionary<int, bool>();
+
 			audioSource = GetComponent<AudioSource>();
 		}
 
 		public void PopulateBoard()
 		{
+			if (m_gameInfo != null)
+			{
+				m_gameInfo.ResetBrickSpeedModifier();
+			}
+
 			numBricksRemaining = 0;
 
 			if (m_boardInfo != null)
 			{
+				m_brickTypesHit.Clear();
+
 				currentBrickPlacePosition = m_initialBrickPosition;
 
 				foreach (BrickHealth brickType in m_boardInfo.GetBrickRows())
 				{
 					if (brickType != null)
 					{
+						if (!m_brickTypesHit.ContainsKey(brickType.pointValue))
+						{
+							m_brickTypesHit.Add(brickType.pointValue, false);
+						}
+
 						for (int i = 0; i < m_boardInfo.GetNumBrickColumns(); i++)
 						{
 							// Can tie in to events on a brick level here when we create them
@@ -66,6 +86,7 @@ namespace Breakout
 			}
 
 			m_bricks.Clear();
+			m_brickTypesHit.Clear();
 		}
 
 		private void BrickDamaged(BrickHealth brickDamaged)
@@ -73,6 +94,16 @@ namespace Breakout
 			if (audioSource != null && brickDamaged.damagedSound != null)
 			{
 				audioSource.PlayOneShot(brickDamaged.damagedSound);
+			}
+
+			if (m_brickTypesHit[brickDamaged.pointValue] == false)
+			{
+				if (m_gameInfo != null)
+				{
+					m_gameInfo.IncreaseBrickSpeedModifier();
+				}
+
+				m_brickTypesHit[brickDamaged.pointValue] = true;
 			}
 		}
 

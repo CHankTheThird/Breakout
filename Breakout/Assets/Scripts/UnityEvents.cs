@@ -12,6 +12,12 @@ namespace Breakout
 		}
 
 		[Serializable]
+		public class UnityEventFloat : UnityEvent<float>
+		{
+
+		}
+
+		[Serializable]
 		public class UnityEventString : UnityEvent<string>
 		{
 

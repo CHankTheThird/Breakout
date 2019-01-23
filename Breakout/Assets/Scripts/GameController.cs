@@ -89,6 +89,11 @@ namespace Breakout
 			{
 				m_board.PopulateBoard();
 			}
+
+			if (m_gameInfo != null)
+			{
+				m_gameInfo.ResetBrickSpeedModifier();
+			}
 		}
 
 		private void GameOver()
