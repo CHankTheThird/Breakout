@@ -478,6 +478,7 @@ GameObject:
   - component: {fileID: 2497466836800418419}
   - component: {fileID: 7558915633691094941}
   - component: {fileID: 3839067443346700942}
+  - component: {fileID: 6693824308044943548}
   m_Layer: 5
   m_Name: GameOverPanel
   m_TagString: Untagged
@@ -568,6 +569,56 @@ MonoBehaviour:
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
+--- !u!114 &6693824308044943548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3368537952394405706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f50f951ef1732641aed87c99c34255f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_gameInfo: {fileID: 11400000, guid: 23fd60e8aa469d54f91677c1ec0be8a8, type: 2}
+  m_gameLevelChangeEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6148968873914278924}
+        m_MethodName: set_text
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: Breakout.UnityEvents+UnityEventString, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  m_gameLivesChangeEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: Breakout.UnityEvents+UnityEventString, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  m_gameScoreChangeEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4262545473526450095}
+        m_MethodName: set_text
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: Breakout.UnityEvents+UnityEventString, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1 &3567100266260618307
 GameObject:
   m_ObjectHideFlags: 0
